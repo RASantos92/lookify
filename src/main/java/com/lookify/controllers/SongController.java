@@ -34,8 +34,6 @@ public class SongController {
 		} else {
 			model.addAttribute("song", songserv.search(search));
 		}
-
-		model.addAttribute("newSong", new Song());
 		return "dashboard.jsp";
 	}
 
@@ -43,10 +41,10 @@ public class SongController {
 	public String create(@Valid @ModelAttribute("newSong") Song newSong, BindingResult result, Model model) {
 		if (result.hasFieldErrors()) {
 			model.addAttribute("song", songserv.getAll());
-			return "index.jsp";
+			return "addSong.jsp";
 		} else {
 			songserv.Create(newSong);
-			return "redirect:/";
+			return "redirect:/dashboard";
 		}
 	}
 
@@ -56,14 +54,20 @@ public class SongController {
 		return "editSong.jsp";
 	}
 
-	@PostMapping("/edit/update/{id}")
+	@GetMapping("/add/song")
+	public String addPage(Model model) {
+		model.addAttribute("newSong", new Song());
+		return "addSong.jsp";
+	}
+
+	@PostMapping("/song/update/{id}")
 	public String updateSong(@PathVariable("id") Long id, @Valid @ModelAttribute("singleSong") Song singleSong,
 			BindingResult result) {
 		if (result.hasErrors()) {
-			return "song.jsp";
+			return "editSong.jsp";
 		} else {
 			songserv.update(singleSong, id);
-			return "redirect:/";
+			return "redirect:/dashboard";
 		}
 	}
 
@@ -77,12 +81,12 @@ public class SongController {
 	@GetMapping("/song/show/{id}")
 	public String show(@PathVariable("id") Long id, Model model) {
 		model.addAttribute("song", songserv.getOne(id));
-		return "show.jsp";
+		return "songInfo.jsp";
 	}
 
 	@GetMapping("/songs/top/10")
-	public String top3(Model model) {
-		model.addAttribute("ninjas", songserv.top10Songs());
+	public String top10Songs(Model model) {
+		model.addAttribute("songs", songserv.top10Songs());
 		return "topCharts.jsp";
 	}
 }

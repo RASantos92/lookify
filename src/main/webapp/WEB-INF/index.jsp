@@ -23,7 +23,7 @@
 	<div class="container">
 		<div class="col mx-auto text-center">
 			<h1>welcome to Lookify</h1>
-			<a href="/dashboard" >Start Looking</a>
+			<a class="btn btn-dark btn-outline-info" href="/dashboard" >Start Looking</a>
 		</div>
 	</div>
 </body>

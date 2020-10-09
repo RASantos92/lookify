@@ -11,7 +11,7 @@ import com.lookify.models.Song;
 @Repository
 public interface SongRepository extends CrudRepository<Song, Long> {
 
-	@Query(value = "SELECT * FROM songs ORDER BY rate DESC LIMIT 10", nativeQuery = true)
+	@Query(value = "SELECT * FROM songs ORDER BY rating DESC LIMIT 10", nativeQuery = true)
 	List<Song> top10Songs();
 
 	List<Song> findByTitleContaining(String search);

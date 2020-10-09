@@ -24,25 +24,27 @@
 		<div class="col mx-auto text-center">
 			<h1>welcome to Lookify</h1>
 			<div style="overflow-y: auto; height: 410px; box-shadow:5px 5px 5px 5px black; table-header: sticky">
-			<form action="/" method="get">
+			<form action="/dashboard" method="get">
         			<input type="text" placeholder="search" name="search"/>
         			<input type="submit" value="search" class="btn btn-dark btn-outline-light"/>
         		</form>
+        		<a class="btn btn-dark btn-outline-light" href="/add/song">Add Song</a>
+        		<a class="btn btn-dark btn-outline-light" href="/songs/top/10">Top 10</a>
 				<table
 					class="table table-dark table-striped table-hover">
 					<tr>
 						<th>Song Name</th>
 						<th>Artist</th>
-						<th>rate</th>
+						<th>Rating</th>
 						<th>Action</th>
 					</tr>
-					<c:forEach items="${lang}" var="language">
+					<c:forEach items="${song}" var="song">
 						<tr>
-							<td><a href="/language/show/${song.id}">${song.name}</a></td>
+							<td><a href="/song/show/${song.id}">${song.title}</a></td>
 							<td>${song.artist}</td>
-							<td>${song.rate}</td>
-							<td><a href="/edit/language/${song.id}">Edit</a> || <a
-								href="/language/destroy/${song.id}">Delete</a></td>
+							<td>${song.rating}</td>
+							<td><a href="/edit/song/${song.id}">Edit</a> || <a
+								href="/song/destroy/${song.id}">Delete</a></td>
 						</tr>
 					</c:forEach>
 				</table>

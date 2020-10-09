@@ -1,39 +1,45 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+  
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>    
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ page import="java.io.*,java.util.*"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+
+
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-    <title>Song Info</title>
-    <link rel="stylesheet" href="/webjars/bootstrap/4.5.0/css/bootstrap.min.css" />
-    <script src="/webjars/jquery/3.5.1/jquery.min.js"></script>
-    <script src="/webjars/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+<meta charset="ISO-8859-1">
+<title>Song Chart</title>
+<link rel="stylesheet"
+	href="/webjars/bootstrap/4.5.2/css/bootstrap.min.css" />
+<script src="/webjars/jquery/3.5.1/jquery.min.js"></script>
+<script src="/webjars/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
-<body>
-   <div class="container">
-        <h1 class="text-center">Top 10 songs</h1>
-        <a href="/dashboard">Home</a>
-        <img src="/imgs/ninja.jpg" alt="ninja pic" class="rounded mx-auto d-block" style="height:450px; width:500px"/>
-
-                <table class="table table-striped">
+<body style="background-color: gray">
+	<div class="container">
+		<div class="col mx-auto text-center">
+			<h1>Top 10 songs</h1>
+			<div style="box-shadow:5px 5px 5px 5px black; table-header: sticky">
+        <a class="btn btn-dark btn-outline-info" href="/dashboard">Home</a>
+                <table class="table table-dark table-striped table-hover">
                     <tr>
                         <th>Song Title</th>
                         <th>Artist</th>
                         <th>rate</th> 
                      <tr>    
-                    <c:forEach items="${song}" var="song">
-                        <tr>
-                            <td><a href="/ninjas/${song.id}">${song.name}</a></td>
+                    <c:forEach items="${songs}" var="song">
+                        <tr class="text-light">
+                            <td>${song.title}</td>
                             <td>${song.artist}</td>
-                            <td>${song.rate}</td>
-                      
+                            <td>${song.rating}</td>
                         </tr>
                     </c:forEach>
                 </table>
-    </div>
-        
+			</div>
+		</div>
+	</div>  
 </body>
 </html>
