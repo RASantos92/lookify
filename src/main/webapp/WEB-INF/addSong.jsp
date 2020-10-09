@@ -22,8 +22,24 @@
 <body style="background-color: gray">
 	<div class="container">
 		<div class="col mx-auto text-center">
-			<h1>welcome to Lookify</h1>
-			<a href="/dashboard" >Start Looking</a>
+			<h1>Add a song</h1>
+			<form:form action="/create/song" method="post"
+				modelAttribute="newSong" style="margin-top: 50px">
+				<div class="form-group">
+					<form:input path="name" class="form-control text-center" placeholder="Add a Title" />
+					<form:errors path="name" class="text-danger" />
+				</div>
+				<div class="form-group">
+					<form:input path="artist" class="form-control text-center" placeholder="Add Artist"  />
+					<form:errors path="artist" class="text-danger" />
+				</div>
+				<div class="form-group">
+					<form:input path="rate" type="number" class="form-control text-center" placeholder="Add rate 1-100" />
+					<form:errors path="rate" class="text-danger" />
+				</div>
+				<input type="submit" value="Add Song"
+					class="btn btn-sm btn-dark" />
+			</form:form>
 		</div>
 	</div>
 </body>

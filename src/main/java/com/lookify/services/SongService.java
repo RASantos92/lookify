@@ -36,4 +36,12 @@ public class SongService {
 	public void destory(Song toDelete, Long id) {
 		songRepo.delete(toDelete);
 	}
+
+	public List<Song> search(String search) {
+		return songRepo.findByTitleContaining(search);
+	}
+
+	public List<Song> top10Songs() {
+		return songRepo.top10Songs();
+	}
 }

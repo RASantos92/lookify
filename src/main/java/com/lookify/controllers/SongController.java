@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.lookify.models.Song;
 import com.lookify.services.SongService;
@@ -22,10 +23,20 @@ public class SongController {
 	}
 
 	@GetMapping("/")
-	public String index(Model model) {
-		model.addAttribute("song", songserv.getAll());
-		model.addAttribute("newSong", new Song());
+	public String index() {
 		return "index.jsp";
+	}
+
+	@GetMapping("/dashboard")
+	public String dashboard(@RequestParam(value = "search", required = false) String search, Model model) {
+		if (search == null) {
+			model.addAttribute("song", songserv.getAll());
+		} else {
+			model.addAttribute("song", songserv.search(search));
+		}
+
+		model.addAttribute("newSong", new Song());
+		return "dashboard.jsp";
 	}
 
 	@PostMapping("/create/song")
@@ -42,7 +53,7 @@ public class SongController {
 	@GetMapping("/edit/song/{id}")
 	public String edit(@PathVariable("id") Long id, Model model) {
 		model.addAttribute("singleSong", songserv.getOne(id));
-		return "edit.jsp";
+		return "editSong.jsp";
 	}
 
 	@PostMapping("/edit/update/{id}")
@@ -67,5 +78,11 @@ public class SongController {
 	public String show(@PathVariable("id") Long id, Model model) {
 		model.addAttribute("song", songserv.getOne(id));
 		return "show.jsp";
+	}
+
+	@GetMapping("/songs/top/10")
+	public String top3(Model model) {
+		model.addAttribute("ninjas", songserv.top10Songs());
+		return "topCharts.jsp";
 	}
 }

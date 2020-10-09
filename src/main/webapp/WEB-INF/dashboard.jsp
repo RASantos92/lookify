@@ -23,7 +23,30 @@
 	<div class="container">
 		<div class="col mx-auto text-center">
 			<h1>welcome to Lookify</h1>
-			<a href="/dashboard" >Start Looking</a>
+			<div style="overflow-y: auto; height: 410px; box-shadow:5px 5px 5px 5px black; table-header: sticky">
+			<form action="/" method="get">
+        			<input type="text" placeholder="search" name="search"/>
+        			<input type="submit" value="search" class="btn btn-dark btn-outline-light"/>
+        		</form>
+				<table
+					class="table table-dark table-striped table-hover">
+					<tr>
+						<th>Song Name</th>
+						<th>Artist</th>
+						<th>rate</th>
+						<th>Action</th>
+					</tr>
+					<c:forEach items="${lang}" var="language">
+						<tr>
+							<td><a href="/language/show/${song.id}">${song.name}</a></td>
+							<td>${song.artist}</td>
+							<td>${song.rate}</td>
+							<td><a href="/edit/language/${song.id}">Edit</a> || <a
+								href="/language/destroy/${song.id}">Delete</a></td>
+						</tr>
+					</c:forEach>
+				</table>
+			</div>
 		</div>
 	</div>
 </body>
