@@ -38,6 +38,9 @@
 					<form:input path="rating" type="number" class="form-control text-center" placeholder="Add rate 1-100" />
 					<form:errors path="rating" class="text-danger" />
 				</div>
+				<div class="form-group">
+					<form:input path="video" class="form-control text-center" placeholder="Add youtube embed" />
+				</div>
 				<input type="submit" value="Add Song"
 					class="btn btn-sm btn-dark" />
 			</form:form>

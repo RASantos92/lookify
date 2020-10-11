@@ -4,9 +4,12 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
@@ -23,9 +26,14 @@ public class Song {
 	@Size(min = 2, message = "Title must be more than 2 characters.")
 	private String title;
 	@Size(min = 2, message = "Artist must be more than 2 characters.")
-	private String artist;
+
+	private String video;
 
 	private Integer rating;
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "artist_id")
+	private Artist artist;
 
 	public Long getId() {
 		return id;
@@ -43,11 +51,11 @@ public class Song {
 		this.title = title;
 	}
 
-	public String getArtist() {
+	public Artist getArtist() {
 		return artist;
 	}
 
-	public void setArtist(String artist) {
+	public void setArtist(Artist artist) {
 		this.artist = artist;
 	}
 
@@ -89,5 +97,13 @@ public class Song {
 	@PreUpdate
 	protected void onUpdate() {
 		this.updatedAt = new Date();
+	}
+
+	public String getVideo() {
+		return video;
+	}
+
+	public void setVideo(String video) {
+		this.video = video;
 	}
 }

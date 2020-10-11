@@ -11,15 +11,19 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.lookify.models.Artist;
 import com.lookify.models.Song;
+import com.lookify.services.ArtistService;
 import com.lookify.services.SongService;
 
 @Controller
 public class SongController {
 	private static SongService songserv;
+	private static ArtistService artistserv;
 
-	public SongController(SongService songserv) {
+	public SongController(SongService songserv, ArtistService artistserv) {
 		this.songserv = songserv;
+		this.artistserv = artistserv;
 	}
 
 	@GetMapping("/")
@@ -48,6 +52,18 @@ public class SongController {
 		}
 	}
 
+	@PostMapping("/create/artist")
+	public String createArtist(@Valid @ModelAttribute("newArtist") Artist newArtist, BindingResult result,
+			Model model) {
+		if (result.hasFieldErrors()) {
+			model.addAttribute("artist", artistserv.getAll());
+			return "addArtist.jsp";
+		} else {
+			artistserv.create(newArtist);
+			return "redirect:/dashboard";
+		}
+	}
+
 	@GetMapping("/edit/song/{id}")
 	public String edit(@PathVariable("id") Long id, Model model) {
 		model.addAttribute("singleSong", songserv.getOne(id));
@@ -58,6 +74,12 @@ public class SongController {
 	public String addPage(Model model) {
 		model.addAttribute("newSong", new Song());
 		return "addSong.jsp";
+	}
+
+	@GetMapping("/add/artist")
+	public String addArtist(Model model) {
+		model.addAttribute("newArtist", new Artist());
+		return "addArtist.jsp";
 	}
 
 	@PostMapping("/song/update/{id}")
@@ -75,7 +97,7 @@ public class SongController {
 	public String destroy(@PathVariable("id") Long id, @Valid @ModelAttribute("singleSong") Song singleSong,
 			BindingResult result) {
 		songserv.destory(singleSong, id);
-		return "redirect:/";
+		return "redirect:/dashboard";
 	}
 
 	@GetMapping("/song/show/{id}")

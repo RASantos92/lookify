@@ -23,13 +23,14 @@
 	<div class="container">
 		<div class="col mx-auto text-center">
 			<h1>welcome to Lookify</h1>
-			<div style="overflow-y: auto; height: 410px; box-shadow:5px 5px 5px 5px black; table-header: sticky">
+			<div style="overflow-y: auto; height: 800px; box-shadow:5px 5px 5px 5px black; table-header: sticky">
 			<form action="/dashboard" method="get">
         			<input type="text" placeholder="search" name="search"/>
         			<input type="submit" value="search" class="btn btn-dark btn-outline-light"/>
         		</form>
         		<a class="btn btn-dark btn-outline-light" href="/add/song">Add Song</a>
         		<a class="btn btn-dark btn-outline-light" href="/songs/top/10">Top 10</a>
+        		<a class="btn btn-dark btn-outline-light" href="/add/artist">Add Artist</a>
 				<table
 					class="table table-dark table-striped table-hover">
 					<tr>

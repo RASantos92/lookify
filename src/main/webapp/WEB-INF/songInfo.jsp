@@ -18,7 +18,6 @@
 <script src="/webjars/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
-
 <body style="background-color: gray">
 	<div class="container">
 		<div class="col mx-auto text-center">
@@ -28,6 +27,12 @@
 			<br>
 			<p>Rating: ${song.rating}</p>
 			<br>
+		</div>
+	</div>
+	<iframe class="col mx-auto" width="1695" height="717" src="https://www.youtube.com/embed/${song.video}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+	</iframe>
+	<div class="container">
+		<div class="col mx-auto text-center">
 			<a href="/dashboard" class="btn btn-dark btn-outline-success" >Home</a>
 			<a href="/edit/song/${song.id}" class="btn btn-dark btn-outline-warning">Edit</a>
 			<a href="/song/destroy/${song.id}" class="btn btn-dark btn-outline-danger">Delete</a>
