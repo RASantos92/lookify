@@ -22,27 +22,27 @@
 <body style="background-color: gray">
 	<div class="container">
 		<div class="col mx-auto text-center">
-			<h1>Add a Artist</h1>
+			<h1>Edit ${singleArtist.name}</h1>
 				<a class="btn btn-dark btn-outline-info" href="/dashboard">Home</a>
-			<form:form action="/create/artist" method="post"
-				modelAttribute="newArtist" style="margin-top: 50px">
+			<form:form action="/artist/update/${singleArtist.id}" method="post"
+				modelAttribute="singleArtist" style="margin-top: 50px">
 				<div class="form-group">
-					<form:input path="name" class="form-control text-center" placeholder="Artist Name or Band" />
+					<form:input path="name" class="form-control text-center" placeholder="${singleArtist.name}" />
 					<form:errors path="name" class="text-danger" />
 				</div>
 				<div class="form-group">
-					<form:input path="hometown" class="form-control text-center" placeholder="Hometown --(optional)--"  />
+					<form:input path="hometown" class="form-control text-center" placeholder="${singleArtist.hometown}"  />
 					<form:errors path="hometown" class="text-danger" />
 				</div>
 				<div class="form-group">
-					<form:input path="genre" class="form-control text-center" placeholder="genre"  />
+					<form:input path="genre" class="form-control text-center" placeholder="${singleArtist.genre}"  />
 					<form:errors path="genre" class="text-danger" />
 				</div>
 				<div class="form-group">
-					<form:input path="age" type="number" class="form-control text-center" placeholder="Age or if band how long have they been together--(optional)--" />
+					<form:input path="age" type="number" class="form-control text-center" placeholder="${singleArtist.age}" />
 					<form:errors path="age" class="text-danger" />
 				</div>
-				<input type="submit" value="Add Artist"
+				<input type="submit" value="Edit Artist"
 					class="btn btn-sm btn-dark" />
 			</form:form>
 		</div>

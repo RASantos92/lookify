@@ -23,7 +23,7 @@
 		<div class="col mx-auto text-center">
 			<h1>${song.title }</h1>
 			<br>
-			<h2>Artist: ${song.artist}</h2>
+			<h2>Artist: ${song.artist.name} </h2>
 			<br>
 			<p>Rating: ${song.rating}</p>
 			<br>

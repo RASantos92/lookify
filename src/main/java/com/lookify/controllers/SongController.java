@@ -41,14 +41,25 @@ public class SongController {
 		return "dashboard.jsp";
 	}
 
+	@GetMapping("/artist/dashboard")
+	public String artistDashboard(@RequestParam(value = "search", required = false) String search, Model model) {
+		if (search == null) {
+			model.addAttribute("artists", artistserv.getAll());
+		} else {
+			model.addAttribute("artists", artistserv.search(search));
+		}
+		return "artistDashboard.jsp";
+	}
+
 	@PostMapping("/create/song")
-	public String create(@Valid @ModelAttribute("newSong") Song newSong, BindingResult result, Model model) {
+	public String create(@Valid @ModelAttribute("newSong") Song newSong, BindingResult result, Model model,
+			@RequestParam("artistId") Long artistId) {
 		if (result.hasFieldErrors()) {
 			model.addAttribute("song", songserv.getAll());
-			return "addSong.jsp";
+			return "artistDisplay.jsp";
 		} else {
 			songserv.Create(newSong);
-			return "redirect:/dashboard";
+			return "redirect:/artist/show/" + artistId;
 		}
 	}
 
@@ -60,7 +71,7 @@ public class SongController {
 			return "addArtist.jsp";
 		} else {
 			artistserv.create(newArtist);
-			return "redirect:/dashboard";
+			return "redirect:/artist/dashboard";
 		}
 	}
 
@@ -68,6 +79,12 @@ public class SongController {
 	public String edit(@PathVariable("id") Long id, Model model) {
 		model.addAttribute("singleSong", songserv.getOne(id));
 		return "editSong.jsp";
+	}
+
+	@GetMapping("/edit/artist/{id}")
+	public String editArtist(@PathVariable("id") Long id, Model model) {
+		model.addAttribute("singleArtist", artistserv.getOne(id));
+		return "editArtist.jsp";
 	}
 
 	@GetMapping("/add/song")
@@ -93,6 +110,17 @@ public class SongController {
 		}
 	}
 
+	@PostMapping("/artist/update/{id}")
+	public String updateArtist(@PathVariable("id") Long id, @Valid @ModelAttribute("singleArtist") Artist singleArtist,
+			BindingResult result) {
+		if (result.hasErrors()) {
+			return "editArtist.jsp";
+		} else {
+			artistserv.update(singleArtist, id);
+			return "redirect:/artist/show/" + id;
+		}
+	}
+
 	@GetMapping("/song/destroy/{id}")
 	public String destroy(@PathVariable("id") Long id, @Valid @ModelAttribute("singleSong") Song singleSong,
 			BindingResult result) {
@@ -100,10 +128,24 @@ public class SongController {
 		return "redirect:/dashboard";
 	}
 
+	@GetMapping("/artist/destroy/{id}")
+	public String destroyArtist(@PathVariable("id") Long id, @Valid @ModelAttribute("singleArtist") Song singleArtist,
+			BindingResult result) {
+		songserv.destory(singleArtist, id);
+		return "redirect:/artist/dashboard";
+	}
+
 	@GetMapping("/song/show/{id}")
 	public String show(@PathVariable("id") Long id, Model model) {
 		model.addAttribute("song", songserv.getOne(id));
 		return "songInfo.jsp";
+	}
+
+	@GetMapping("/artist/show/{id}")
+	public String showArtist(@PathVariable("id") Long id, Model model) {
+		model.addAttribute("artist", artistserv.getOne(id));
+		model.addAttribute("newSong", new Song());
+		return "artistDisplay.jsp";
 	}
 
 	@GetMapping("/songs/top/10")

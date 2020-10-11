@@ -38,4 +38,8 @@ public class ArtistService {
 		artistRepo.delete(toDelete);
 	}
 
+	public List<Artist> search(String search) {
+		return artistRepo.findByNameContaining(search);
+	}
+
 }

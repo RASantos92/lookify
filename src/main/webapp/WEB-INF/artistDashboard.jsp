@@ -29,23 +29,23 @@
         			<input type="submit" value="search" class="btn btn-dark btn-outline-light"/>
         		</form>
         		<a class="btn btn-dark btn-outline-light" href="/songs/top/10">Top 10</a>
-				<a href="/artist/dashboard" class="btn btn-dark btn-outline-light" >Artists</a>
+        		<a href="/dashboard" class="btn btn-dark btn-outline-success" >Songs</a>
 				<a href="/add/artist/" class="btn btn-dark btn-outline-info">Add Artist</a>
 				<table
 					class="table table-dark table-striped table-hover">
 					<tr>
-						<th>Song Name</th>
 						<th>Artist</th>
-						<th>Rating</th>
+						<th>Genre</th>
+						<th>Hometown</th>
 						<th>Action</th>
 					</tr>
-					<c:forEach items="${song}" var="song">
+					<c:forEach items="${artists}" var="artist">
 						<tr>
-							<td><a href="/song/show/${song.id}">${song.title}</a></td>
-							<td><a href="/artist/show/${song.artist.id}">${song.artist.name}</a></td>
-							<td>${song.rating}</td>
-							<td><a href="/edit/song/${song.id}">Edit</a> || <a
-								href="/song/destroy/${song.id}">Delete</a></td>
+							<td><a href="/artist/show/${artist.id}">${artist.name}</a></td>
+							<td>${artist.genre}</td>
+							<td>${artist.hometown}</td>
+							<td><a href="/edit/artist/${artist.id}">Edit</a> || <a
+								href="/artist/destroy/${artist.id}">Delete</a></td>
 						</tr>
 					</c:forEach>
 				</table>

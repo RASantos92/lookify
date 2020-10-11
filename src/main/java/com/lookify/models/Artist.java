@@ -29,7 +29,18 @@ public class Artist {
 	private String name;
 	@Size(min = 3, message = "HomeTown has to be more than 5 characters long.")
 	private String hometown;
+	@Size(min = 3, message = "Genre has to be more than 5 characters long.")
+	private String genre;
 	private Integer age;
+
+	public String getGenre() {
+		return genre;
+	}
+
+	public void setGenre(String genre) {
+		this.genre = genre;
+	}
+
 	@OneToMany(mappedBy = "artist", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<Song> Songs;
 

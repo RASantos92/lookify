@@ -33,7 +33,7 @@
                     <c:forEach items="${songs}" var="song">
                         <tr class="text-light">
                             <td>${song.title}</td>
-                            <td>${song.artist}</td>
+                            <td>${song.artist.name}</td>
                             <td>${song.rating}</td>
                         </tr>
                     </c:forEach>
