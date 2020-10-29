@@ -10,6 +10,8 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
@@ -27,22 +29,17 @@ public class Artist {
 	private Long id;
 	@Size(min = 3, message = "Artist name has to be 3 or more characters.")
 	private String name;
-	@Size(min = 3, message = "HomeTown has to be more than 5 characters long.")
+
 	private String hometown;
-	@Size(min = 3, message = "Genre has to be more than 5 characters long.")
-	private String genre;
+
 	private Integer age;
-
-	public String getGenre() {
-		return genre;
-	}
-
-	public void setGenre(String genre) {
-		this.genre = genre;
-	}
 
 	@OneToMany(mappedBy = "artist", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<Song> Songs;
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "user_id")
+	private User user;
 
 	public List<Song> getSongs() {
 		return Songs;

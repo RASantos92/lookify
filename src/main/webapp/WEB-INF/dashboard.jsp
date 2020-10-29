@@ -23,14 +23,15 @@
 	<div class="container">
 		<div class="col mx-auto text-center">
 			<h1>welcome to Lookify</h1>
-			<div style="overflow-y: auto; height: 800px; box-shadow:5px 5px 5px 5px black; table-header: sticky">
 			<form action="/dashboard" method="get">
         			<input type="text" placeholder="search" name="search"/>
         			<input type="submit" value="search" class="btn btn-dark btn-outline-light"/>
         		</form>
-        		<a class="btn btn-dark btn-outline-light" href="/songs/top/10">Top 10</a>
+        		<a class="btn btn-dark btn-outline-light" href="/playlist">Play List</a>
 				<a href="/artist/dashboard" class="btn btn-dark btn-outline-light" >Artists</a>
 				<a href="/add/artist/" class="btn btn-dark btn-outline-info">Add Artist</a>
+				<a class="btn btn-dark btn-outline-danger" href="/logout">Logout</a>
+			<div class="mt-3" style="overflow-y: auto; height: 800px; box-shadow:5px 5px 5px 5px black; table-header: sticky">
 				<table
 					class="table table-dark table-striped table-hover">
 					<tr>
@@ -43,9 +44,9 @@
 						<tr>
 							<td><a href="/song/show/${song.id}">${song.title}</a></td>
 							<td><a href="/artist/show/${song.artist.id}">${song.artist.name}</a></td>
-							<td>${song.rating}</td>
+							<td>${song.getAverageRating()}</td>
 							<td><a href="/edit/song/${song.id}">Edit</a> || <a
-								href="/song/destroy/${song.id}">Delete</a></td>
+								href="/song/destroy/${song.id}">Add</a></td>
 						</tr>
 					</c:forEach>
 				</table>

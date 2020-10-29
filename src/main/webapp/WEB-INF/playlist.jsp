@@ -23,11 +23,12 @@
 	<div class="container">
 		<div class="col mx-auto text-center">
 			<h1>welcome to Lookify</h1>
-			<form action="/artist/dashboard" method="get">
-        			<input type="text" placeholder="search" name="search"/>
-        			<input type="submit" value="search" class="btn btn-dark btn-outline-light"/>
-        		</form>
-        		<a class="btn btn-dark btn-outline-light" href="/playlist">Play List</a>
+			<form:form action="/user/${user.id}/playlist" method="post" modelAttribute="newPlaylist">
+        			<form:input placeholder="Playlist name" path="name" class="form-control"/>
+        			<form:errors path="name" class="text-danger"/>
+        			<input type="submit" value="Create Playlist" class="btn btn-primary btn-block" />
+        		</form:form>
+        		<a class="btn btn-dark btn-outline-light" href="/songs/top/10">Top 10</a>
         		<a href="/dashboard" class="btn btn-dark btn-outline-success" >Songs</a>
 				<a href="/add/artist/" class="btn btn-dark btn-outline-info">Add Artist</a>
 				<a class="btn btn-dark btn-outline-danger" href="/logout">Logout</a>
@@ -39,12 +40,10 @@
 						<th>Home town</th>
 						<th>Action</th>
 					</tr>
-					<c:forEach items="${artists}" var="artist">
+					<c:forEach items="${user.playlists}" var="artist">
 						<tr>
-							<td><a href="/artist/show/${artist.id}">${artist.name}</a></td>
-							<td>${artist.hometown}</td>
-							<td><a href="/edit/artist/${artist.id}">Edit</a> || <a
-								href="/artist/destroy/${artist.id}">Add</a></td>
+							<td><a href="/artist/show/${user.id}">${user.userName}</a></td>
+							
 						</tr>
 					</c:forEach>
 				</table>

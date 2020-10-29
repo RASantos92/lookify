@@ -21,20 +21,23 @@
 	<div class="container">
 		<div class="col mx-auto text-center">
 			<h1>Edit ${singleSong.title}</h1>
+				<a class="btn btn-dark btn-outline-info" href="/dashboard">Home</a>
+				<a class="btn btn-dark btn-outline-danger" href="/logout">Logout</a>
 			<form:form action="/song/update/${singleSong.id}" method="post"
 				modelAttribute="singleSong" style="margin-top: 50px">
 				<div class="form-group">
-					<form:input path="title" class="form-control text-center" placeholder="Add a Title" />
+					<form:input path="title" class="form-control text-center" placeholder="${singleSong.title})" />
 					<form:errors path="title" class="text-danger" />
 				</div>
 				<div class="form-group">
-					<form:input path="artist" class="form-control text-center" placeholder="Add Artist"  />
-					<form:errors path="artist" class="text-danger" />
-				</div>
-				<div class="form-group">
-					<form:input path="rating" type="number" class="form-control text-center" placeholder="Add rate 1-100" />
+					<form:input path="rating" type="number" class="form-control text-center" placeholder="${singleSong.rating }" />
 					<form:errors path="rating" class="text-danger" />
 				</div>
+				<div class="form-group">
+					<form:input path="video" class="form-control text-center" placeholder="${singleSong.video}" />
+					<form:errors path="video" class="text-danger" />
+				</div>
+				<form:input path="artist" type="hidden" class="form-control text-center" value="${singleSong.artist.id}" />
 				<input type="submit" value="Edit Song"
 					class="btn btn-sm btn-dark" />
 			</form:form>

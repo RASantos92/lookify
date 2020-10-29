@@ -24,6 +24,7 @@
 		<div class="col mx-auto text-center">
 			<h1>Edit ${singleArtist.name}</h1>
 				<a class="btn btn-dark btn-outline-info" href="/dashboard">Home</a>
+				<a class="btn btn-dark btn-outline-danger" href="/logout">Logout</a>
 			<form:form action="/artist/update/${singleArtist.id}" method="post"
 				modelAttribute="singleArtist" style="margin-top: 50px">
 				<div class="form-group">

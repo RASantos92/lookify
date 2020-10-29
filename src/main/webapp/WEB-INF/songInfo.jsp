@@ -25,7 +25,7 @@
 			<br>
 			<h2>Artist: ${song.artist.name} </h2>
 			<br>
-			<p>Rating: ${song.rating}</p>
+			<p>Rating: ${song.getAverageRating()}</p>
 			<br>
 		</div>
 	</div>
@@ -35,8 +35,43 @@
 		<div class="col mx-auto text-center">
 			<a href="/dashboard" class="btn btn-dark btn-outline-success" >Home</a>
 			<a href="/edit/song/${song.id}" class="btn btn-dark btn-outline-warning">Edit</a>
-			<a href="/song/destroy/${song.id}" class="btn btn-dark btn-outline-danger">Delete</a>
+			<a href="/song/destroy/${song.id}" class="btn btn-dark btn-outline-danger">Add</a>
+			<a href="/artist/show/${song.artist.id}" class="btn btn-dark btn-outline-info">More ${song.artist.name}</a>
 			</div>
 		</div>
+		<div class="row ">
+		<div class="col-sm-3 mt-5 mx-auto">
+                <div class="card mx-auto">
+                    <div class="card-header text-light bg-dark text-center" ><h2>Leave a Review</h2></div>
+                    <div class="card-body">
+                        <form:form action="/song/${song.id}/comment" method="post" modelAttribute="newComment">
+                            <div class="row text-center">
+                                <div class="col form-group">
+                                    <label>Rating</label>
+                                    <form:input type="number" path="rating" class="form-control" placeholder="rating between 0-100!"/>
+                                    <form:errors path="rating" class="text-danger"/>
+                                    <label>Comment</label>
+                                    <form:textarea path="comment" class="form-control"/>
+                                   	<form:errors path="comment" class="text-danger"/>
+                                </div>
+                            </div>
+                            <input type="submit" value="Review ${song.title}" class="btn btn-primary btn-block" />
+                        </form:form>
+                    </div>
+                </div>
+              </div>
+                <div class="col-sm-8 mx-auto">
+                <ul class="list-group mt-5">
+                    <li class="list-group-item bg-dark text-light">Reviews:</li>
+                    <c:forEach items="${song.comments}" var="review">
+                        <li class="list-group-item">
+                        	<strong>${review.rating} out of 100</strong><br>
+                            <strong>${review.user.userName}: ${review.comment}</strong><br>
+                        </li>
+                    </c:forEach>
+                </ul>
+                
+		</div>
+              </div>
 </body>
 </html>

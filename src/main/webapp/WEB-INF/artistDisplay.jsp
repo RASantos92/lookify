@@ -23,8 +23,6 @@
 		<div class="col mx-auto text-center">
 			<h1>${artist.name}</h1>
 			<br>
-			<h2>Genre: ${artist.genre}</h2>
-			<br>
 			<p>Hometown: ${artist.hometown}</p>
 			<br>
 		</div>
@@ -35,6 +33,8 @@
 			<a href="/artist/dashboard" class="btn btn-dark btn-outline-light" >Artist</a>
 			<a href="/edit/artist/${artist.id}" class="btn btn-dark btn-outline-warning">Edit</a>
 			<a href="/add/artist/" class="btn btn-dark btn-outline-info">Add Artist</a>
+			<a href="https://www.stubhub.com/find/s/?q=${artist.name}" class="btn btn-dark btn-outline-info">Ticket Info</a>
+			<a class="btn btn-dark btn-outline-danger" href="/logout">Logout</a>
 			</div>
 		</div>
 		<div class="container">
@@ -47,11 +47,12 @@
 		        		<form:errors path="title" class="text-danger" />
 		        	</div>
 		        	<div class="form-group">
-						<form:input path="rating" type="number" class="form-control text-center" placeholder="Add rate 1-100" />
-						<form:errors path="rating" class="text-danger" />
+						<form:input path="genresInput" class="form-control text-center" placeholder="Add genre" />
+						<form:errors path="genresInput" class="text-danger" />
 					</div>
 					<div class="form-group">
 						<form:input path="video" class="form-control text-center" placeholder="Add youtube embed" />
+						<form:errors path="video" class="text-danger"/>
 					</div>
 		        		<form:input type="hidden" path="artist"  value="${artist.id}"/>
 		        		<input type="hidden" name="artistId" value="${artist.id}">
@@ -70,7 +71,7 @@
 							<td><a href="/song/show/${song.id}"><b>${song.title}</b></a></td>
 							<td>${song.rating}</td>
 							<td><a class="btn btn-dark btn-outline-warning" href="/edit/song/${song.id}">Edit</a>
-							<a class="btn btn-dark btn-outline-danger" href="/artist/song/${song.id}">Delete</a></td>
+							<a class="btn btn-dark btn-outline-danger" href="/artist/song/${song.id}">Add</a></td>
 						</tr>
 					</c:forEach>
 				</table>

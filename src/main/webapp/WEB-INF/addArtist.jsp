@@ -24,6 +24,7 @@
 		<div class="col mx-auto text-center">
 			<h1>Add a Artist</h1>
 				<a class="btn btn-dark btn-outline-info" href="/dashboard">Home</a>
+				<a class="btn btn-dark btn-outline-danger" href="/logout">Logout</a>
 			<form:form action="/create/artist" method="post"
 				modelAttribute="newArtist" style="margin-top: 50px">
 				<div class="form-group">
@@ -33,10 +34,6 @@
 				<div class="form-group">
 					<form:input path="hometown" class="form-control text-center" placeholder="Hometown --(optional)--"  />
 					<form:errors path="hometown" class="text-danger" />
-				</div>
-				<div class="form-group">
-					<form:input path="genre" class="form-control text-center" placeholder="genre"  />
-					<form:errors path="genre" class="text-danger" />
 				</div>
 				<div class="form-group">
 					<form:input path="age" type="number" class="form-control text-center" placeholder="Age or if band how long have they been together--(optional)--" />
