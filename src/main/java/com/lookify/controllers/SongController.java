@@ -36,10 +36,13 @@ public class SongController {
 	@GetMapping("/dashboard")
 	public String dashboard(@RequestParam(value = "search", required = false) String search, Model model,
 			HttpSession session) {
+		User loggedInUser = (User) session.getAttribute("user");
 		if (search == null) {
 			model.addAttribute("song", songserv.getAll());
+			model.addAttribute("user", loggedInUser);
 		} else {
 			model.addAttribute("song", songserv.search(search));
+			model.addAttribute("user", loggedInUser);
 		}
 		return "dashboard.jsp";
 	}
@@ -47,10 +50,13 @@ public class SongController {
 	@GetMapping("/artist/dashboard")
 	public String artistDashboard(@RequestParam(value = "search", required = false) String search, Model model,
 			HttpSession session) {
+		User loggedInUser = (User) session.getAttribute("user");
 		if (search == null) {
 			model.addAttribute("artists", artistserv.getAll());
+			model.addAttribute("user", loggedInUser);
 		} else {
 			model.addAttribute("artists", artistserv.search(search));
+			model.addAttribute("user", loggedInUser);
 		}
 		return "artistDashboard.jsp";
 	}
@@ -194,13 +200,13 @@ public class SongController {
 		return "redirect:/playlist";
 	}
 
-	@GetMapping("/playlist")
-	public String playlist(HttpSession session, Model model) {
+	@GetMapping("/playlist/{id}")
+	public String playlist(@PathVariable("id") Long id, HttpSession session, Model model) {
 		User loggedInUser = (User) session.getAttribute("user");
 		if (loggedInUser == null) {
 			return "redirect:/";
 		}
-		model.addAttribute("user", loggedInUser);
+		model.addAttribute("user", userServ.getUser(id));
 		model.addAttribute("newPlaylist", new Playlist());
 		return "playlist.jsp";
 	}

@@ -36,13 +36,11 @@
 				<table
 					class="table table-dark table-striped table-hover">
 					<tr>
-						<th>Artist</th>
-						<th>Home town</th>
-						<th>Action</th>
+						<th>Play Lists</th>
 					</tr>
-					<c:forEach items="${user.playlists}" var="artist">
+					<c:forEach items="${user.playlist}" var="playlist">
 						<tr>
-							<td><a href="/artist/show/${user.id}">${user.userName}</a></td>
+							<td><a href="/artist/show/${user.id}">${playlist.name}</a></td>
 							
 						</tr>
 					</c:forEach>

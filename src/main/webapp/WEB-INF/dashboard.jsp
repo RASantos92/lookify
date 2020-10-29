@@ -27,7 +27,7 @@
         			<input type="text" placeholder="search" name="search"/>
         			<input type="submit" value="search" class="btn btn-dark btn-outline-light"/>
         		</form>
-        		<a class="btn btn-dark btn-outline-light" href="/playlist">Play List</a>
+        		<a class="btn btn-dark btn-outline-light" href="/playlist/${user.id}">Play List</a>
 				<a href="/artist/dashboard" class="btn btn-dark btn-outline-light" >Artists</a>
 				<a href="/add/artist/" class="btn btn-dark btn-outline-info">Add Artist</a>
 				<a class="btn btn-dark btn-outline-danger" href="/logout">Logout</a>
