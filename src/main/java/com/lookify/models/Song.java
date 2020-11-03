@@ -53,7 +53,8 @@ public class Song {
 	@OneToMany(mappedBy = "song", fetch = FetchType.LAZY)
 	private List<Comment> comments;
 
-	@OneToMany(mappedBy = "song", fetch = FetchType.LAZY)
+	@ManyToMany(fetch = FetchType.LAZY)
+	@JoinTable(name = "playlist_songs", joinColumns = @JoinColumn(name = "song_id"), inverseJoinColumns = @JoinColumn(name = "playlist_id"))
 	private List<Playlist> playlists;
 
 	@Column(updatable = false)

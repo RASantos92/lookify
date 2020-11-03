@@ -29,6 +29,16 @@
 			<br>
 		</div>
 	</div>
+			<div class="col d-flex justify-content-around text-center">
+				<form:form action="/songs/add/playlist/${song.id}" method="post" modelAttribute="songToPlaylist">
+		                 <select name="playlist" >
+		                   		<c:forEach items="${user.playlist}" var="playlist">
+		                   			<option value="${playlist.id}">${playlist.name}</option>
+		                    	</c:forEach>
+		                  </select>
+		              <input type="submit" value="Add song to playlist" class="btn-sm btn-primary" />
+		             </form:form>
+			</div>
 	<iframe class="col mx-auto" width="1695" height="717" src="https://www.youtube.com/embed/${song.video}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
 	</iframe>
 	<div class="container">

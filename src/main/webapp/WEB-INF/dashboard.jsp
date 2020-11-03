@@ -42,7 +42,7 @@
 					</tr>
 					<c:forEach items="${song}" var="song">
 						<tr>
-							<td><a href="/song/show/${song.id}">${song.title}</a></td>
+							<td><a href="/song/show/${song.id}/${user.id}">${song.title}</a></td>
 							<td><a href="/artist/show/${song.artist.id}">${song.artist.name}</a></td>
 							<td>${song.getAverageRating()}</td>
 							<td><a href="/edit/song/${song.id}">Edit</a> || <a

@@ -10,7 +10,7 @@ import com.lookify.repositorys.ArtistRepository;
 
 @Service
 public class ArtistService {
-	private static ArtistRepository artistRepo;
+	private ArtistRepository artistRepo;
 
 	public ArtistService(ArtistRepository artistRepo) {
 		this.artistRepo = artistRepo;

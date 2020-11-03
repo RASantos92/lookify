@@ -1,6 +1,7 @@
 package com.lookify.models;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,6 +10,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
@@ -36,9 +39,9 @@ public class Playlist {
 	@JoinColumn(name = "user_id")
 	private User user;
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "song_id")
-	private Song song;
+	@ManyToMany(fetch = FetchType.LAZY)
+	@JoinTable(name = "playlist_songs", joinColumns = @JoinColumn(name = "playlist_id"), inverseJoinColumns = @JoinColumn(name = "song_id"))
+	private List<Song> songs;
 
 	public Playlist() {
 
@@ -84,12 +87,12 @@ public class Playlist {
 		this.user = user;
 	}
 
-	public Song getSong() {
-		return song;
+	public List<Song> getSongs() {
+		return songs;
 	}
 
-	public void setSong(Song song) {
-		this.song = song;
+	public void setSongs(List<Song> songs) {
+		this.songs = songs;
 	}
 
 	@PrePersist

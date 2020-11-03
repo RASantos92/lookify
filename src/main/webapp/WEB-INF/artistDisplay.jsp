@@ -68,7 +68,7 @@
 					</tr>
 					<c:forEach items="${artist.songs}" var="song">
 						<tr>
-							<td><a href="/song/show/${song.id}"><b>${song.title}</b></a></td>
+							<td><a href="/song/show/${song.id}/${user.id}"><b>${song.title}</b></a></td>
 							<td>${song.rating}</td>
 							<td><a class="btn btn-dark btn-outline-warning" href="/edit/song/${song.id}">Edit</a>
 							<a class="btn btn-dark btn-outline-danger" href="/artist/song/${song.id}">Add</a></td>

@@ -23,9 +23,9 @@ import com.lookify.services.UserService;
 
 @Controller
 public class SongController {
-	private static SongService songserv;
-	private static ArtistService artistserv;
-	private static UserService userServ;
+	private SongService songserv;
+	private ArtistService artistserv;
+	private UserService userServ;
 
 	public SongController(SongService songserv, ArtistService artistserv, UserService userServ) {
 		this.songserv = songserv;
@@ -148,10 +148,11 @@ public class SongController {
 		return "redirect:/artist/dashboard";
 	}
 
-	@GetMapping("/song/show/{id}")
-	public String show(@PathVariable("id") Long id, Model model, HttpSession session) {
+	@GetMapping("/song/show/{sid}/{uid}")
+	public String show(@PathVariable("sid") Long sid, @PathVariable("uid") Long uid, Model model, HttpSession session) {
+		model.addAttribute("user", userServ.getUser(uid));
 		model.addAttribute("newComment", new Comment());
-		model.addAttribute("song", songserv.getOne(id));
+		model.addAttribute("song", songserv.getOne(sid));
 		return "songInfo.jsp";
 	}
 
@@ -197,7 +198,7 @@ public class SongController {
 		}
 		newPlaylist.setUser(loggedInUser);
 		songserv.create(newPlaylist);
-		return "redirect:/playlist";
+		return "redirect:/playlist/" + id;
 	}
 
 	@GetMapping("/playlist/{id}")
@@ -209,5 +210,12 @@ public class SongController {
 		model.addAttribute("user", userServ.getUser(id));
 		model.addAttribute("newPlaylist", new Playlist());
 		return "playlist.jsp";
+	}
+
+	@PostMapping("/song/add/playlist/{sid}")
+	public String addSongToPlaylist(@ModelAttribute("songToPlaylist") Long playId, @PathVariable("sid") Long sid,
+			Model model, HttpSession session) {
+		songserv.getOne(sid);
+		return null;
 	}
 }
