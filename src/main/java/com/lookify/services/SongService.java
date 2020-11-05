@@ -85,11 +85,11 @@ public class SongService {
 		return songRepo.save(newSongPlus);
 	}
 
-	public void addSongToPlaylist(Song song, Playlist playlist) {
-		List<Playlist> play = new ArrayList<Playlist>();
-
-		return null;
-	}
+//	public void addSongToPlaylist(Song song, Playlist playlist) {
+//		List<Playlist> play = new ArrayList<Playlist>();
+//
+//		return null;
+//	}
 
 	public List<Song> songsInGenre(String genre) {
 		Optional<Genre> g = genreRepo.findGenreByName(genre);
