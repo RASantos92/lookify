@@ -190,7 +190,7 @@ public class SongController {
 
 	@PostMapping("/user/{id}/playlist")
 	public String createPlaylist(@Valid @ModelAttribute("newPlaylist") Playlist newPlaylist, BindingResult result,
-			@PathVariable("id") Long id, Model model, HttpSession session) {
+			Model model, HttpSession session) {
 		User loggedInUser = (User) session.getAttribute("user");
 		if (result.hasErrors()) {
 			model.addAttribute("user", loggedInUser);
@@ -198,16 +198,16 @@ public class SongController {
 		}
 		newPlaylist.setUser(loggedInUser);
 		songserv.create(newPlaylist);
-		return "redirect:/playlist/" + id;
+		return "redirect:/playlist/" + loggedInUser.getId();
 	}
 
 	@GetMapping("/playlist/{id}")
-	public String playlist(@PathVariable("id") Long id, HttpSession session, Model model) {
+	public String playlist(HttpSession session, Model model) {
 		User loggedInUser = (User) session.getAttribute("user");
 		if (loggedInUser == null) {
 			return "redirect:/";
 		}
-		model.addAttribute("user", userServ.getUser(id));
+		model.addAttribute("user", loggedInUser);
 		model.addAttribute("newPlaylist", new Playlist());
 		return "playlist.jsp";
 	}

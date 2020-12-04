@@ -52,6 +52,7 @@ public class Playlist {
 	}
 
 	public void setId(Long id) {
+		System.out.println("Someone called SetId: " + id);
 		this.id = id;
 	}
 
